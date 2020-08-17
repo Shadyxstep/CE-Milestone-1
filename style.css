@@ -1,0 +1,602 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@500&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+:root {
+    --background: rgba(0, 0, 0);
+}
+
+.logo {
+    margin-top: 10px;
+    color: #fff;
+}
+
+body {
+    font-family: 'Exo', sans-serif;
+    text-align: center;
+}
+
+header {
+    background: var(--background);
+    text-align: center;
+    position: fixed;
+    z-index: 999;
+    top:0;
+    width: 100%;
+}
+
+/*HOME PAGE*/
+/*Home page image animation code taken from YouTube: Speed Codez: ''Change Background Image Continuosly [ Pure CSS ]'' */
+
+.home-hero {
+    background-image: url(../img/skatelegs.jpg);
+    background-size: cover;
+    background-position: center;
+
+    position: relative; /*fix footer not displaying*/
+    padding: 7.5em 0;
+    padding-bottom: 2.5rem; /*--Fixing footer not displaying--*/
+    margin: 0 auto;
+    height: 100vh;
+    width: 100%;
+
+    transition: 10s;
+    animation-name: animate;
+    animation-direction: alternate-reverse;
+    animation-duration: 45s;
+    animation-fill-mode: backwards;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes animate {
+    0%{
+        background-image: url(../img/skatedark1.jpg);
+    }20%{
+        background-image: url(../img/skatedark2.jpg);
+    }40%{
+        background-image: url(../img/skatedark3.jpg);
+    }60%{
+        background-image: url(../img/skatedark4.jpg);
+    }80%{
+        background-image: url(../img/skatedark5.jpg);
+    }100%{
+        background-image: url(../img/skateramp.jpg);
+    }
+}
+
+
+.container {
+    width: 95%;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.title {
+    color: #fff;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    margin-top:4em;
+    display: block;
+    position: center;
+}
+
+.title span {
+    display: block;
+    font-weight: 800;
+    font-size: 1.3em;
+}
+
+/*---BUTTON STYLING---*/
+
+.button {
+    font-size: 1.75rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    border-width: 2px;
+    border-style: solid;
+    padding: .5em 1.75em;
+    position: relative;
+    top:1rem;
+}
+
+.button-style {
+    color: #fff;
+}
+
+.button-style:hover,
+.button-style:focus {
+    background: #fff;
+    color:#000;
+    opacity: .7;
+    border-color: #fff;
+}
+
+/*---Nav bar---*/
+/*-- Nav styling taken from Kevin Powell: ''Create a responsive navigation with no JS!''--*/
+
+.nav-toggle {
+    display: none;
+}
+
+/*---Hamburger Menu Nav elements---*/
+
+.nav-toggle-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 1em;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-toggle-label span,  /*---Styling for hamburger drop down menu---*/
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    display: block;
+    background: #fff;
+    height: 2px;
+    width: 2em;
+    border-radius: 2px;
+    position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+}
+
+.nav-toggle-label span::before {
+    top: 7px;
+}
+
+.nav-toggle-label span::after {
+    bottom: 7px;
+}
+
+nav {
+    position: fixed;
+    text-align: left;
+    top: 100;
+    left:0;
+    background: var(--background);
+    width: 100%;
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 400ms ease-in-out;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+
+.nav-toggle:checked ~ nav {
+    transform:scale(1, 1);
+}
+
+.nav-toggle:checked ~ nav a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+}
+
+/*--Responsive Nav styling--*/
+/*---Grid Column code taken from Youtube Tutorials; Kevin Powell: ''Create a responsive navigation with no JS!''---*/
+
+@media screen and (min-width: 800px) {
+    .nav-toggle-label {
+        display: none;
+    }
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 1fr) 1fr;
+    }
+
+    .logo {
+        margin-top: 5px;
+        grid-column: 1 / 2;
+    }
+
+    nav {
+        all: unset; /*--Undoes prior dropdown styling for nav--*/
+        grid-column: 3 / 4;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    nav ul {
+        display: flex;
+        
+    }
+
+    nav li {
+        margin-left: 3em;
+        margin-bottom: 0;
+    }
+
+    nav a {
+        opacity: 1;
+        position: relative;
+    }
+
+    nav a::before {
+        content: '';
+        display: block;
+        height: 5px;
+        background: #fff;
+        position: absolute;
+        top: -.75em;
+        left: 0;
+        right: 0;
+        transform: scale(0,1);
+        transition: transform ease-in-out 250ms;
+    }
+
+    nav a:hover:before {
+        transform: scale(1,1);
+    }
+
+
+}
+
+
+/* ABOUT US */
+/* About us section is my own code */
+
+.about-us {
+    background-image: url(../img/skatelegs.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height:100vh;
+    width: 100%;
+}
+
+.about-title {
+    text-transform: uppercase;
+   font-weight: 800; 
+   color: #fff;
+   padding: 0;
+   margin-top:4em;
+   display: block;
+   position: center;
+
+}
+
+.about-text {
+   font-weight: 500;
+   font-size: 110%;
+   color: #DCDCDC;
+   padding: 2rem 2rem;
+   margin:1em;
+   display: block;
+   position: center;
+   border-left: solid 2px;
+   border-right: solid 2px;
+}
+
+
+
+/* TESTIMONIALS */
+
+/*-- FORMAT OF MEMBER REVIEWS TAKEN FROM KEVIN POWELL: ''How to Create a Responsive Website from Scratch'' ON YOUTUBE--*/
+
+.mem-testimonials {
+margin: 0;
+padding: 0;
+background-image: url(../img/skateramp.jpg);
+background-size: cover;
+position: relative;
+height: 100vh;
+width: 100%;
+z-index: 998;
+}
+
+.test-title {
+    text-transform: uppercase;
+    padding-top: 3em;
+    padding-bottom: 1em;
+    color: #fff;
+}
+
+.members {
+    margin: 0;
+    position: relative;
+}
+
+.members img {
+    display: block;
+}
+
+.member-review {
+    position: absolute;
+    z-index: 100;
+    bottom: 2em;
+    left: 3em;
+    right: 3em;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.75);
+    padding-top:0.75em;
+}
+
+.member-review p {
+    margin: 1em;
+}
+
+
+/*-- FORMAT OF MEMBER REVIEWS TAKEN FROM KEVIN POWELL: ''How to Create a Responsive Website from Scratch'' ON YOUTUBE--*/
+
+@media (min-width: 60rem) {
+    .members {
+        width: 25%;
+        float: left;
+        overflow: hidden;
+    }
+
+    .member-review {
+        transform: translateY(150%);
+    }
+
+    .members:hover .member-review {
+        transform: translateY(0%);
+    }
+}
+
+
+/* SIGN UP */
+
+.sign-up-backround {
+    background-image: url(../img/skatejump.jpg);
+    background-size: cover;
+    background-position: relative;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 75px;
+}
+
+.sign-up-form {
+    text-align: center;
+    position: center;
+    width: 300px;
+    box-shadow: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    margin: 8% auto 0;
+}
+
+.sign-up-form h1 {
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.input-box {
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid rgb(255, 255, 255);
+    outline: none;
+}
+
+button {
+    color: #000;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 15px;
+    margin: 10px 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.sign-up-btn {
+    background-color: rgba(10, 137, 241, 0.8);
+    color: #fff;
+}
+
+.f-btn {
+    color: #fff;
+}
+
+.sign-up-form p {
+    color: #fff;
+    margin-top: 10px;
+}
+
+hr {
+    color: #fff;
+    margin-top: 1px;
+    width: 80%;
+}
+
+.or {
+    width: 30px;
+    margin: -19px auto 10px;
+}
+
+i {
+    color:#fff;
+}
+
+/*CONTACT PAGE*/
+
+.contact-bg {
+    margin: 0;
+    padding: 0;
+    background-image: url(../img/boardsunset.jpg);
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.contact-form {
+    width: 85%;
+    max-width: 600px;
+    background:rgba(0, 0, 0, 0.75);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px 40px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 20px #000000b3;
+    margin-top: 3em;
+    margin-bottom: 4em;
+}
+
+.contact-form h1{
+    margin-top: 0;
+    font-weight: 200;
+    color: #fff;
+}
+
+.txtb {
+    border: 1px solid gray;
+    margin: 8px 0;
+    padding: 12px 18px;
+    border-radius: 8px;
+}
+
+.txtb label {
+    display: block;
+    text-align: left;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.txtb input,.txtb textarea{
+    width: 100%;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 18px;
+    margin-top: 6px;
+    color: #fff;
+}
+
+.btn {
+    display: inline-block;
+    background: rgba(245, 137, 75, 0.938);
+    padding: 14px 0;
+    color: rgb(214, 214, 214);
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+    width: 100%;
+
+}
+
+input[type=text] {
+  color: #fff;
+}
+
+/*FOOTER*/
+
+.social-links {
+    padding-bottom: 15px;
+}
+
+.social-links li a i {
+    width: 32px;
+    height: 32px;
+    padding: 12px 0;
+    border-radius: 50%;
+    font-size: 13px;
+    line-height: 7px;
+    text-align: center;
+    color: #fafafa;
+    background: #8f8f8f;
+    transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+    -o-transition: all 0.35s ease-in-out;
+}
+
+.social-links li a i:hover {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+#footer-details {
+    padding: 20px;
+}
+
+p{
+    color:#fff;
+}
+
+h1, h2, h3, h4, {
+    margin:0;
+    color: #fff;
+}
+
+footer {
+    min-height: 50px;
+    background-color: #000;
+    margin: 0;
+}
+
+.container-fluid {
+    padding: 0;
+    margin-bottom: 0;
+    position: relative;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.uppercase {
+    text-transform: uppercase;
+    color: #fff;
+    padding: 10px 0;
+}
+
+h7 {
+    color: #fff;
+    margin: 0;
+}
+
+
